@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ファイルセレクタ - 基本形</string>
+    <string name="message_cannot_use_sdcard">SDカードが利用できないようです</string>
+    <string name="description_up_button">上のディレクトリへ</string>
+    <string name="description_icon">アイコン</string>
+
+</resources>
