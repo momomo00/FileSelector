@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -37,6 +39,8 @@ public class FileListFragment extends Fragment {
     private File             mCurrentDir;
     private TextView         mDirField;
     private ListView         mListView;
+    private ImageButton     mUpButton;
+    private OnFileSelectedListener  mOnFileSelectedListener;
 
     // XMLでの定義は出来なくなります
     private FileListFragment() {
@@ -62,7 +66,28 @@ public class FileListFragment extends Fragment {
         View view = inflater.inflate(R.layout.file_list_fragment, container, false);
 
         mDirField = (TextView) view.findViewById(R.id.text_dir);
+
         mListView = (ListView) view.findViewById(R.id.list);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                File file = (File)parent.getItemAtPosition(position);
+                if((mOnFileSelectedListener != null) && (file != null)) {
+                    mOnFileSelectedListener.onFileSelected(file);
+                }
+            }
+        });
+
+        mUpButton = (ImageButton)view.findViewById(R.id.button_up);
+        mUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                File file = mCurrentDir.getParentFile();
+                if((mOnFileSelectedListener != null) && (file != null)) {
+                    mOnFileSelectedListener.onFileSelected(file);
+                }
+            }
+        });
 
         return view;
     }
@@ -99,6 +124,6 @@ public class FileListFragment extends Fragment {
     }
 
     public void setOnFileSelectedListener(OnFileSelectedListener listener) {
-        // TODO 適切な処理を追加してください
+        mOnFileSelectedListener = listener;
     }
 }
