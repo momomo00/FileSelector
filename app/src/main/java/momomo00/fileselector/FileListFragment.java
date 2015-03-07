@@ -105,7 +105,16 @@ public class FileListFragment extends Fragment {
 
             // ディレクトリに含まれるファイルをアダプタに追加
             for (File file : mCurrentDir.listFiles()) {
-                adapter.add(file);
+                if(file.isDirectory()) {
+                    adapter.add(file);
+                } else {
+                    String mimeType = FileSelectorActivity.getMIMEType(file);
+                    if((mimeType.equals("video/*"))
+                            || (mimeType.equals("audio/*"))
+                            || (mimeType.equals("image/*"))) {
+                        adapter.add(file);
+                    }
+                }
             }
 
             // ファイルを名前順にソート

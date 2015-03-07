@@ -75,10 +75,16 @@ public class FileSelectorActivity extends FragmentActivity {
         }
     };
 
-    private String getMIMEType(File file) {
+    public static String getMIMEType(File file) {
         String fileName = file.getName();
         int index = fileName.lastIndexOf('.');
         String extension = (index >= 0) ? fileName.substring(index + 1) : null;
-        return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+
+        String str1 =  MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+        index = str1.lastIndexOf('/');
+        str1 = str1.substring(0, index + 1);
+        String mimeType = str1 + "*";
+
+        return mimeType;
     }
 }
