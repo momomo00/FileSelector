@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class FileListFragment extends Fragment {
     // ファイル選択時に呼ばれるリスナ
@@ -36,9 +37,9 @@ public class FileListFragment extends Fragment {
         return instance;
     }
 
-    private File             mCurrentDir;
-    private TextView         mDirField;
-    private ListView         mListView;
+    private File            mCurrentDir;
+    private TextView        mDirField;
+    private ListView        mListView;
     private ImageButton     mUpButton;
     private OnFileSelectedListener  mOnFileSelectedListener;
 
